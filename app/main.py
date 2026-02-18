@@ -2,9 +2,9 @@ from fastapi import FastAPI
 
 from app.db.base import Base
 from app.db.session import engine
-from app.api.advertisers import router as advertiser_router
+from app.advertisers.router import router as advertiser_router
 
-from app.models import advertiser  # important for table registration
+from app.advertisers import models  # important for table registration
 
 app = FastAPI()
 

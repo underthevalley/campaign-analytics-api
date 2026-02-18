@@ -4,7 +4,7 @@ from uuid import UUID
 class AdvertiserCreate(BaseModel):
     name: str
 
-class AdvertiserRead(BaseModel):
+class AdvertiserResponse(BaseModel):
     id: UUID
     name: str
 
