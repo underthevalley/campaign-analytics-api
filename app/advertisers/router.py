@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from . import service, schemas
@@ -11,7 +11,10 @@ def create_advertiser(
     data: schemas.AdvertiserCreate,
     db: Session = Depends(get_db),
 ):
-    return service.create_advertiser(db, data)
+    try:
+        return service.create_advertiser(db, data)
+    except service.AdvertiserAlreadyExists as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.get("/", response_model=list[schemas.AdvertiserResponse])
