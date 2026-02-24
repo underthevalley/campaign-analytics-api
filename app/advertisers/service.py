@@ -13,9 +13,9 @@ def create_advertiser(db: Session, data: AdvertiserCreate) -> Advertiser:
     is_present = (
         db.query(Advertiser)
         .filter(func.lower(Advertiser.name) == data.name.lower())
-        .first
+        .first()
     )
-
+    
     if is_present: 
         raise AdvertiserAlreadyExists(f"Advertiser '{data.name}' already exists.")
 
