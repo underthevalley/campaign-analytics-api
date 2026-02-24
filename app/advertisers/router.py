@@ -14,7 +14,7 @@ def create_advertiser(
     try:
         return service.create_advertiser(db, data)
     except service.AdvertiserAlreadyExists as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=409, detail=str(e))
 
 
 @router.get("/", response_model=list[schemas.AdvertiserResponse])
